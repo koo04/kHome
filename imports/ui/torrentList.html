@@ -1,0 +1,92 @@
+<template name="torrent_list">
+  <!--<button class="refresh">Refresh</button>-->
+  {{#if torrents}}
+  <table class="responsive-table striped">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Date Added</th>
+        <th>Status</th>
+        <th>Downloaded</th>
+        <th>Size</th>
+        <th>Ratio</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      {{#each torrents}}
+        {{> torrent}}
+      {{/each}}
+    </tbody>
+  </table>
+  <form>
+    <div class="file-field input-field">
+      <div class="btn">
+        <span>File</span>
+        <input type="file" multiple>
+      </div>
+      <div class="file-path-wrapper">
+        <input class="file-path validate" type="text" placeholder="Upload one or more files">
+      </div>
+    </div>
+    <button class="btn" type="submit">
+      <span>Upload</span>
+    </button>
+  </form>
+  {{else}}
+  <div class="col s12 center">
+    <div class="preloader-wrapper big active center-align">
+        <div class="spinner-layer spinner-blue">
+          <div class="circle-clipper left">
+            <div class="circle"></div>
+          </div><div class="gap-patch">
+            <div class="circle"></div>
+          </div><div class="circle-clipper right">
+            <div class="circle"></div>
+          </div>
+        </div>
+
+        <div class="spinner-layer spinner-red">
+          <div class="circle-clipper left">
+            <div class="circle"></div>
+          </div><div class="gap-patch">
+            <div class="circle"></div>
+          </div><div class="circle-clipper right">
+            <div class="circle"></div>
+          </div>
+        </div>
+
+        <div class="spinner-layer spinner-yellow">
+          <div class="circle-clipper left">
+            <div class="circle"></div>
+          </div><div class="gap-patch">
+            <div class="circle"></div>
+          </div><div class="circle-clipper right">
+            <div class="circle"></div>
+          </div>
+        </div>
+
+        <div class="spinner-layer spinner-green">
+          <div class="circle-clipper left">
+            <div class="circle"></div>
+          </div><div class="gap-patch">
+            <div class="circle"></div>
+          </div><div class="circle-clipper right">
+            <div class="circle"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    {{/if}}
+</template>
+
+<template name="torrent">
+  <tr id="{{_id}}">
+    <td>{{name}}</td>
+    <td>{{toDateTime dateAdded}}</td>
+    <td>{{status}}</td>
+    <td class="downloaded">{{downloaded}}</td>
+    <td>{{totalSize}}</td>
+    <td>{{uploadRatio}}</td>
+  </tr>
+</template>
