@@ -13,6 +13,7 @@ caching-compiler@1.1.9
 caching-html-compiler@1.1.0
 callback-hook@1.0.10
 check@1.2.4
+coffeescript@1.11.1_4
 ddp@1.2.5
 ddp-client@1.2.9
 ddp-common@1.2.8
@@ -24,6 +25,7 @@ ecmascript-runtime@0.3.15
 ejson@1.0.13
 es5-shim@4.6.15
 fastclick@1.0.13
+fourseven:scss@3.13.0
 geojson-utils@1.0.10
 hot-code-push@1.0.4
 html-tools@1.0.11
@@ -49,12 +51,16 @@ mongo-id@1.0.6
 npm-mongo@2.2.16_1
 observe-sequence@1.0.14
 ordered-dict@1.0.9
+ostrio:cookies@2.0.4
+ostrio:files@1.6.6
 promise@0.8.8
 random@1.0.10
+reactive-dict@1.1.8
 reactive-var@1.0.11
 reload@1.1.11
 retry@1.0.9
 routepolicy@1.0.12
+session@1.1.7
 shell-server@0.2.1
 spacebars@1.0.13
 spacebars-compiler@1.1.0

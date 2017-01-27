@@ -1,0 +1,18 @@
+<template name="torrent">
+  <tr id="{{_id}}">
+    <td>{{name}}</td>
+    <td>{{toDateTime dateAdded}}</td>
+    <td>{{status}}</td>
+    <td class="downloaded">{{downloaded}}</td>
+    <td>{{totalSize}}</td>
+    <td>{{uploadRatio}}</td>
+    <td>
+      <button class="waves-effect waves-light btn {{#with playing}} blue pause {{else}} green play {{/with}}" data-id={{_id}}><i class="material-icons">{{#with playing}} pause {{else}} play_arrow {{/with}}</i></button>
+      {{#with confirm}}
+      <button class="waves-effect waves-light btn green confirm" data-id="{{this}}"><i class="material-icons">check</i></button>
+      {{else}}
+      <button class="waves-effect waves-light btn red delete" data-id={{_id}}><i class="material-icons">delete</i></button>
+      {{/with}}
+    </td>
+  </tr>
+</template>

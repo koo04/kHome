@@ -44,8 +44,17 @@ function torrentToReadable(name) {
 
   Meteor.methods({
 
-    putTorrents: function() {
+    putTorrents: function(tor) {
+      var future = new Future();
 
+      transmission.addFile(tor.versions.original.path, function(err, arg){
+        if(arg)
+          future.return(true);
+        else
+          future.return(err);
+      });
+
+      return future.wait();
     },
 
     getTorrents: function () {
@@ -61,7 +70,7 @@ function torrentToReadable(name) {
             if(ratio < 0)
               ratio = 0;
 
-            torrents.push({_id: index,
+            torrents.push({_id: torrent.id,
               name: torrentToReadable(torrent.name),
               dateAdded: torrent.addedDate,
               status: getStatus(torrent.status),
@@ -75,6 +84,58 @@ function torrentToReadable(name) {
       });
 
       return future.wait();
+    },
+
+    deleteTorrent: function(id) {
+      var future = new Future();
+      transmission.remove(id, function(err, args) {
+        if(err) {
+          future.return(err);
+        } else {
+          future.return(true);
+        }
+      });
+
+      return future.wait();
+    },
+
+    isPlaying: function(id) {
+      var future = new Future();
+      transmission.get(id, function(err, tor) {
+        tor = tor.torrents[0];
+        if(err) {
+          future.return(err);
+        } else {
+          if(tor.status != 0)
+            future.return(tor.id);
+          else
+            future.return(false);
+        }
+      });
+
+      return future.wait();
+    },
+
+    pauseTorrent: function(id) {
+      var future = new Future();
+      transmission.stop(id, function(err, arg) {
+        if(err) {
+          future.return(err);
+        } else {
+          future.return(true);
+        }
+      });
+    },
+
+    playTorrent: function(id) {
+      var future = new Future();
+      transmission.start(id, function(err, arg) {
+        if(err) {
+          future.return(err);
+        } else {
+          future.return(true);
+        }
+      });
     }
 
   });
