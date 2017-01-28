@@ -40,7 +40,9 @@ function torrentToReadable(name) {
   return name.replace(/\./g, " ");
 }
 
-(function() {  
+(function() {
+
+  var ids = [];
 
   Meteor.methods({
 
@@ -62,6 +64,7 @@ function torrentToReadable(name) {
 
       transmission.get(function(err, res) {
         var torrents = [];
+        ids = [];
         if(err) {
           future.return(err);
         } else {
@@ -78,6 +81,7 @@ function torrentToReadable(name) {
               totalSize: formatBytes(torrent.sizeWhenDone, 1),
               uploadRatio: ratio
             });
+            ids.push(torrent.id);
           });
           future.return(torrents);
         }
@@ -88,6 +92,7 @@ function torrentToReadable(name) {
 
     deleteTorrent: function(id) {
       var future = new Future();
+
       transmission.remove(id, function(err, args) {
         if(err) {
           future.return(err);
@@ -101,6 +106,7 @@ function torrentToReadable(name) {
 
     isPlaying: function(id) {
       var future = new Future();
+
       transmission.get(id, function(err, tor) {
         tor = tor.torrents[0];
         if(err) {
@@ -118,6 +124,7 @@ function torrentToReadable(name) {
 
     pauseTorrent: function(id) {
       var future = new Future();
+
       transmission.stop(id, function(err, arg) {
         if(err) {
           future.return(err);
@@ -129,6 +136,7 @@ function torrentToReadable(name) {
 
     playTorrent: function(id) {
       var future = new Future();
+
       transmission.start(id, function(err, arg) {
         if(err) {
           future.return(err);
@@ -136,6 +144,34 @@ function torrentToReadable(name) {
           future.return(true);
         }
       });
+
+      return future.wait();
+    },
+
+    pauseAll: function() {
+      var future = new Future();
+      
+      transmission.stop(ids, function(err, args) {
+        if(err)
+          future.return(err);
+        else
+          future.return(true);
+      });
+
+      return future.wait();
+    },
+
+    playAll: function() {
+      var future = new Future();
+
+      transmission.start(ids, function(err, args) {
+        if(err)
+          future.return(err);
+        else
+          future.return(true);
+      });
+
+      return future.wait();
     }
 
   });

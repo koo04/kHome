@@ -29,7 +29,7 @@ Template.torrent_list.onCreated(function() {
 
 Template.torrent_list.events({
 
-  'change #fileInput': function (e, template) {
+  'change #fileInput': function (e, t) {
     if (e.currentTarget.files && e.currentTarget.files[0]) {
       // We upload only one file, in case
       // multiple files were selected
@@ -40,19 +40,31 @@ Template.torrent_list.events({
       }, false);
 
       upload.on('start', function () {
-        template.currentUpload.set(this);
+        t.currentUpload.set(this);
       });
 
       upload.on('end', function (error, tor) {
-        template.currentUpload.set(false);
-        template.torrentUpload.set(this);
+        t.currentUpload.set(false);
+        t.torrentUpload.set(this);
         Meteor.call("putTorrents", tor, function(err, test) {
-          template.torrentUpload.set(false);
+          t.torrentUpload.set(false);
         })
       });
 
       upload.start();
     }
+  },
+
+  'click a.pause-all': function(e, t) {
+    e.preventDefault();
+
+    Meteor.call("pauseAll");
+  },
+
+  'click a.play-all': function(e, t) {
+    e.preventDefault();
+
+    Meteor.call("playAll");
   }
 
 });
