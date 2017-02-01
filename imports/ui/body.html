@@ -1,4 +1,5 @@
-<body>{{> loginButtons}}
+<body>
+  {{#if currentUser}}
   <nav>
     <div class="nav-wrapper">
       <ul id="nav-mobile" class="right hide-on-med-and-down">
@@ -6,12 +7,10 @@
       </ul>
     </div>
   </nav>
-
   <div class="container">
       {{> weather}}
       {{> torrent_list}}
   </div>
-
   <footer class="page-footer">
     <div class="footer-copyright">
       <div class="container">
@@ -19,6 +18,11 @@
       </div>
     </div>
   </footer>
+  {{else}}
+  <div class="container valign-wrapper" style="height: 100%">
+    {{> login}}
+  </div>
+  {{/if}}
 
 </body>
 

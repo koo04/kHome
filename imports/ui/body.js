@@ -11,5 +11,4 @@ Template.body.helpers({
 });
 
 Template.body.events({
-  
 });

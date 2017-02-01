@@ -1,0 +1,13 @@
+@import './weather-icons.min'
+@import './weather-icons-wind.min'
+@import './materialize-src/sass/materialize'
+@import './_custom.sass'
+
+//Lazy Classes
+@for $i from 1 through 100
+  .padding-#{$i}
+    padding: $i + rem!important
+  .width-#{$i}
+    width: $i + %!important
+  .padding-left-#{$i}
+    padding-left: $i + rem!important
