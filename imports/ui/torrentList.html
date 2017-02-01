@@ -60,6 +60,10 @@
         </div>
         {{/with}}
 
+        {{else if torrentsError}}
+          <div>
+            {{torrentsError}}
+          </div>
         {{else}}
           {{> preload}}
         {{/if}}

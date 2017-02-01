@@ -11,19 +11,27 @@ Template.torrent_list.onCreated(function() {
   this.torrentUpload = new ReactiveVar(false);
 
   Meteor.call("getTorrents", function(err, torrents) {
-    Session.set('torrents', torrents);
-  });
-
-  Meteor.setInterval(function() {
-    var value = "No Torrents";
-    Meteor.call("getTorrents", function(err, torrents) {
-      if(torrents) {
-        torrents.forEach(function(torrent) {
-            Session.set('torrents', torrents);
+    if(!torrents.code) {
+      torrents.forEach(function(torrent) {
+          Session.set('torrents', torrents);
+      });
+  
+      Meteor.setInterval(function() {
+        Meteor.call("getTorrents", function(err, torrents) {
+          if(!torrents.code) {
+            torrents.forEach(function(torrent) {
+                Session.set('torrents', torrents);
+            });
+          } else if(torrents.code = "ENOTFOUND") {
+            Session.set('torrentsError', "Can not reach Torrent server");
+          }
         });
-      }
-    });
-  }, 3000);
+      }, 3000);
+
+    } else if(torrents.code = "ENOTFOUND") {
+      Session.set('torrentsError', "Can not reach Torrent server");
+    }
+  });
 
 });
 
@@ -73,6 +81,10 @@ Template.torrent_list.helpers({
 
   torrents: function() {
     return Session.get('torrents');
+  },
+
+  torrentsError: function() {
+    return Session.get('torrentsError');
   },
 
   currentUpload: function () {

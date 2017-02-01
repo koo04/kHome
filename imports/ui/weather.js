@@ -3,24 +3,39 @@ import "./weather.html";
 (function() {
 
     Template.weather.onCreated(function() {
+      Meteor.call("getWeather", function(err, weather) {
+        var sunset = new Date(weather.sunset).getHours();
+        var time = new Date().getHours();
+        if(!(weather.code > 699 && weather.code < 800) && !(weather.code > 899 && weather.code < 1000)) {
+          if(time < sunset)
+            weather.time = "day-";
+          else
+            weather.time = "night-";
+        }
+
+        Session.set('weather', weather);
+      });
+
+      Meteor.setInterval(function() {
         Meteor.call("getWeather", function(err, weather) {
-            var sunset = new Date(weather.sunset).getHours();
-            var time = new Date().getHours();
+          var sunset = new Date(weather.sunset).getHours();
+          var time = new Date().getHours();
+          if(!(weather.code > 699 && weather.code < 800) && !(weather.code > 899 && weather.code < 1000)) {
             if(time < sunset)
-                weather.time = "day";
+              weather.time = "day-";
             else
-                weather.time = "night";
+              weather.time = "night-";
+          }
 
-            console.log(weather);
-
-            Session.set('weather', weather);
+          Session.set('weather', weather);
         });
+      }, 60000);
     });
 
     Template.weather.helpers({
-        todaysForcast: function() {
-            return Session.get('weather');
-        }
+      todaysForcast: function() {
+        return Session.get('weather');
+      }
     });
 
 }());

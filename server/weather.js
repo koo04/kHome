@@ -20,6 +20,7 @@ function get(type) {
     if(err){ 
       future.return(err)
     } else {
+      weather.code = res.data.weather[0].id
       weather.temp = Math.floor(res.data.main.temp);
       weather.humidity = res.data.main.humidity;
       weather.wind = {};

@@ -108,10 +108,10 @@ function torrentToReadable(name) {
       var future = new Future();
 
       transmission.get(id, function(err, tor) {
-        tor = tor.torrents[0];
         if(err) {
           future.return(err);
         } else {
+          tor = tor.torrents[0];
           if(tor.status != 0)
             future.return(tor.id);
           else
