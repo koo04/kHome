@@ -66,8 +66,10 @@ import './login.html'
       return Template.instance().register.get();
     },
     userCount: function() {
-      console.log(Meteor.call('getUserCount'));
-      return Meteor.call('getUserCount');
+      if(Meteor.call('getUserCount') > 0)
+        return false;
+      else
+        return true;
     }
   });
 
