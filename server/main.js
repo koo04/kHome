@@ -27,9 +27,13 @@ function formatBytes(bytes,decimals) {
    if(bytes == 0) return '0 Bytes';
    var k = 1000,
        dm = decimals + 1 || 3,
-       sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'],
+       sizes = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'],
        i = Math.floor(Math.log(bytes) / Math.log(k));
    return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
+}
+
+function limitString(str, lng) {
+  return (str.length > lng) ? str.substr(0,lng-1) + "..." : str;
 }
 
 function getPercentage(current, max) {
@@ -72,14 +76,25 @@ function torrentToReadable(name) {
             var ratio = Math.round(torrent.uploadRatio * 100) / 100;
             if(ratio < 0)
               ratio = 0;
-
+              
             torrents.push({_id: torrent.id,
-              name: torrentToReadable(torrent.name),
+              name: {
+                snip: limitString(torrentToReadable(torrent.name), 40),
+                full: torrentToReadable(torrent.name)
+              },
               dateAdded: torrent.addedDate,
               status: getStatus(torrent.status),
               downloaded: getPercentage(torrent.haveValid,torrent.sizeWhenDone),
               totalSize: formatBytes(torrent.sizeWhenDone, 1),
-              uploadRatio: ratio
+              uploadRatio: ratio,
+              speed: {
+                up: formatBytes(torrent.rateUpload, 1),
+                down: formatBytes(torrent.rateDownload, 1)
+              },
+              peers: {
+                seeding: torrent.peersSendingToUs,
+                leeching: torrent.peersGettingFromUs
+              }
             });
             ids.push(torrent.id);
           });
