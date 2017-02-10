@@ -1,6 +1,15 @@
 import Transmission from 'transmission';
 import Future from 'fibers/future';
+import { Settings } from '/lib/Settings';
 var transmission = new Transmission (Meteor.settings.private.torrentServer);
+
+function formToArray (form) {
+  var fo = [];
+  for(var i = 0; i < form.length; i++) {
+    fo[form[i].name] = form[i].value;
+  }
+  return fo;
+}
 
 function getStatus(status) {
   switch(status) {
@@ -189,8 +198,27 @@ function torrentToReadable(name) {
       return future.wait();
     },
 
-    getUserCount: function() {
-      return Meteor.users.find({}, {fields:{username:1,emails:1}}).count();
+    updateSettings: function(form) {
+      form = formToArray(form);
+      Settings.update({user: this.userId}, {
+        $set:{
+          profile: {
+            fName: form['fName'],
+            lName: form['lName']
+          },
+          torrent: {
+            host: form['torrentHost'],
+            port: parseInt(form['torrentPort']),
+            username: form['torrentUserName'],
+            password: form['torrentPassword'],
+            ssl: ((form['torrentSSL']) ? true : false)
+          },
+          weather: {
+            appId: form['weatherAppId'],
+            zip: form['weatherZip']
+          }
+        }
+      });
     }
 
   });

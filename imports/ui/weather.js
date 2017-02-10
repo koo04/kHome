@@ -6,7 +6,7 @@ import "./weather.html";
       Meteor.call("getWeather", function(err, weather) {
         var sunset = new Date(weather.sunset).getHours();
         var time = new Date().getHours();
-        console.log(weather);
+        console.log("Getting the initial weather report.");
         if(!(weather.code > 699 && weather.code < 800) && !(weather.code > 899 && weather.code < 1000)) {
           if(time < sunset) {
             weather.time = "day-";
@@ -22,6 +22,7 @@ import "./weather.html";
       });
 
       Meteor.setInterval(function() {
+        console.log("Getting the weather report.");
         Meteor.call("getWeather", function(err, weather) {
           var sunset = new Date(weather.sunset).getHours();
           var time = new Date().getHours();
@@ -35,6 +36,7 @@ import "./weather.html";
               weather.time = "night-";
             }
           }
+          console.log("Got the weather report.");
 
           Session.set('weather', weather);
         });

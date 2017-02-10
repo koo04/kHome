@@ -7,6 +7,7 @@ import './login.html'
 
   Template.login.onCreated(function() {
     this.register = new ReactiveVar(false);
+    this.userCount = new ReactiveVar(false);
     this.good = new ReactiveVar(false);
   });
 
@@ -45,17 +46,40 @@ import './login.html'
       var email = $('[name=email]').val();
       var password = $('[name=password]').val();
       var good = t.good.get();
+      console.log("User attempting to register: " + email);
       if($('form').hasClass('register')) {
         if(good) {
+          console.log("Form is good.");
+            // Settings.insert({
+            //   user: user._id,
+            //   zip: "",
+            //   torrentServer: {
+            //     host: "",
+            //     port: 9091,
+            //     username: "",
+            //     password: "",
+            //     ssl: false
+            //   }
+            // });
           Accounts.createUser({
             email: email,
             password: password
+          }, function(err) {
+            if(err) {
+              console.log(err);
+            }
           });
+        } else {
+          console.log("Form is NOT good.");
         }
       } else if($('form').hasClass('login')) {
+        console.log("User with email " + email + " attempted to login.");
         Meteor.loginWithPassword(email, password, function(err) {
-          if(err)
-            console.log(err)
+          if(err) {
+            console.log("User failed to log in: " + err);
+          } else {
+            console.log("User successfully logged in.");
+          }
         });
       }
     }
@@ -66,10 +90,7 @@ import './login.html'
       return Template.instance().register.get();
     },
     userCount: function() {
-      if(Meteor.call('getUserCount') > 0)
-        return false;
-      else
-        return true;
+      return Template.instance().userCount.get();
     }
   });
 

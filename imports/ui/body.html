@@ -4,15 +4,22 @@
     <div class="nav-wrapper container">
       <ul id="nav-mobile" class="right hide-on-med-and-down">
         <!--<li><a href="#">Home</a></li>--> 
+        <li><a class="settings"><i class="material-icons">settings</i></a></li>
         <li><a class="logout"><i class="material-icons">power_settings_new</i></a></li>
         <li><img src="http://placehold.it/200" alt="" class="circle z-depth-2 margin-1" width="80px"></li>
       </ul>
     </div>
   </nav>
+  {{#if settingsPage}}
+  <div class="container">
+    {{> settings}}
+  </div>
+  {{else}}
   <div class="container">
       {{> weather}}
       {{> torrent_list}}
   </div>
+  {{/if}}
   <footer class="page-footer">
     <div class="footer-copyright">
       <div class="container">
