@@ -24,6 +24,19 @@ Template.settings.onCreated(function() {
   }
 });
 
+Template.settings.onRendered(function() {
+  if($('input[name=torrentUserName]').val() != '')
+    $('label[for=torrentUserName]').addClass('active');
+  if($('input[name=torrentPassword').val() != '')
+    $('label[for=torrentPassword]').addClass('active');
+  if($('input[name=torrentHost]').val() != '')
+    $('label[for=torrentHost]').addClass('active');
+  if($('input[name=weatherAppID]').val() != '')
+    $('label[for=weatherAppID]').addClass('active');
+  if($('input[name=weatherZip]').val() != '')
+    $('label[for=weatherZip]').addClass('active');
+});
+
 Template.settings.events({
   'click a.save': function(e, t) {
     e.preventDefault();

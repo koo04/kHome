@@ -35,6 +35,8 @@ Template.torrent_list.onCreated(function() {
     } else if(torrents.code = "ENOTFOUND") {
       console.log("Can not reach the Torrent Server!");
       Session.set('torrentsError', "Can not reach Torrent server");
+    } else {
+      console.log(err || torrents);
     }
   });
 

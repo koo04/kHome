@@ -1,7 +1,7 @@
 import Transmission from 'transmission';
 import Future from 'fibers/future';
 import { Settings } from '/lib/Settings';
-var transmission = new Transmission (Meteor.settings.private.torrentServer);
+var transmission;
 
 function formToArray (form) {
   var fo = [];
@@ -53,6 +53,18 @@ function torrentToReadable(name) {
   return name.replace(/\./g, " ");
 }
 
+function getTorrentSettings(id) {
+  var settings = Settings.findOne({user: Meteor.userId()});
+
+  return {
+        host: settings.torrent.host,
+        port: settings.torrent.port,
+        username: settings.torrent.username,
+        password: settings.torrent.password,
+        ssl: settings.torrent.ssl
+      };
+}
+
 (function() {
 
   var ids = [];
@@ -74,13 +86,17 @@ function torrentToReadable(name) {
 
     getTorrents: function () {
       var future = new Future();
-
+      var settings = getTorrentSettings();
+      console.log("Gettings Torrents...");
+      transmission = new Transmission (settings);
       transmission.get(function(err, res) {
         var torrents = [];
         ids = [];
         if(err) {
+          console.log(err);
           future.return(err);
         } else {
+          console.log("   Got the Torrents.");
           res.torrents.forEach(function(torrent, index) {
             var ratio = Math.round(torrent.uploadRatio * 100) / 100;
             if(ratio < 0)
@@ -107,6 +123,7 @@ function torrentToReadable(name) {
             });
             ids.push(torrent.id);
           });
+
           future.return(torrents);
         }
       });
