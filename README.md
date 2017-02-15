@@ -4,12 +4,12 @@
 
 * ~~Login~~
 * Settings
---* ~~Profile~~
---* ~~Torrent~~
---* ~~Weather~~
---* YouTube
---* My Anime List
---* Gmail
+  * ~~Profile~~
+  * ~~Torrent~~
+  * ~~Weather~~
+  * YouTube
+  * My Anime List
+  * Gmail
 
 ## Torrents
 
