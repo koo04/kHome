@@ -1,5 +1,5 @@
 import Future from 'fibers/future';
-var settings = Meteor.settings.private.weather;
+import { Weather } from '/lib/Settings';
 var convertion = JSON.parse(Assets.getText('weatherIcons.json'));
 function getPlace() {
   if(settings.cityID != "")
@@ -12,34 +12,32 @@ function getPlace() {
     return "q=" + settings.city + "," + settings.countryCode;
 }
 
-function get(type) {
-  var future = new Future();
-  var location = getPlace();
-  Meteor.http.call("GET", "http://api.openweathermap.org/data/2.5/" + type + "?" + location + "&units=imperial&appid=" + settings.appID, function(err, res) {
-    var weather = {};
-    if(err){ 
-      future.return(err)
-    } else {
-      weather.code = res.data.weather[0].id
-      weather.temp = Math.floor(res.data.main.temp);
-      weather.humidity = res.data.main.humidity;
-      weather.wind = {};
-      weather.wind.speed = res.data.wind.speed;
-      weather.wind.dir = res.data.wind.deg;
-      weather.sunset = res.data.sys.sunset*1000
-      weather.icon = convertion[res.data.weather[0].id];
-      future.return(weather);
-    }
-  });
-  return future.wait();
-}
-
 (function() {
 
   Meteor.methods({
       
     getWeather: function() {
-      return get("weather");
+      var future = new Future();
+      // var location = getPlace();
+      var settings = Weather.findOne({user: Meteor.userId()});
+      console.log("Getting weather for " + Meteor.userId());
+      Meteor.http.call("GET", "http://api.openweathermap.org/data/2.5/weather?zip=" + settings.zip  + ",us&units=imperial&appid=" + settings.appId, function(err, res) {
+        var weather = {};
+        if(err){ 
+          future.return(err);
+        } else {
+          weather.code = res.data.weather[0].id
+          weather.temp = Math.floor(res.data.main.temp);
+          weather.humidity = res.data.main.humidity;
+          weather.wind = {};
+          weather.wind.speed = res.data.wind.speed;
+          weather.wind.dir = res.data.wind.deg;
+          weather.sunset = res.data.sys.sunset*1000
+          weather.icon = convertion[res.data.weather[0].id];
+          future.return(weather);
+        }
+      });
+      return future.wait();
     }
 
   });

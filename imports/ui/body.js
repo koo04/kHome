@@ -30,6 +30,10 @@ Template.body.events({
     e.preventDefault();
     console.log("Settings page");
     t.settingsPage.set(true);
+  },
+  'click a.home': function(e, t) {
+    e.preventDefault();
+    t.settingsPage.set(false);
   }
 });
 

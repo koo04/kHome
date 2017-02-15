@@ -2,7 +2,7 @@
   "name": "kHome",
   "private": true,
   "scripts": {
-    "start": "meteor run --settings settings.json"
+    "start": "meteor run"
   },
   "dependencies": {
     "babel-runtime": "6.18.0",
@@ -10,6 +10,7 @@
     "hammerjs": "^2.0.8",
     "jquery": "^3.1.1",
     "meteor-node-stubs": "~0.2.0",
+    "popura": "^1.2.5",
     "react": "^15.4.2",
     "react-addons-pure-render-mixin": "^15.4.2",
     "react-dom": "^15.4.2",

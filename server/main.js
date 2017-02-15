@@ -1,6 +1,9 @@
 import Transmission from 'transmission';
 import Future from 'fibers/future';
-import { Settings } from '/lib/Settings';
+import { Profile } from '/lib/Settings';
+import { Torrent } from '/lib/Settings';
+import { Weather } from '/lib/Settings';
+import { Mal } from '/lib/Settings';
 var transmission;
 
 function formToArray (form) {
@@ -54,14 +57,14 @@ function torrentToReadable(name) {
 }
 
 function getTorrentSettings(id) {
-  var settings = Settings.findOne({user: Meteor.userId()});
+  var torrent = Torrent.findOne({user: Meteor.userId()});
 
   return {
-        host: settings.torrent.host,
-        port: settings.torrent.port,
-        username: settings.torrent.username,
-        password: settings.torrent.password,
-        ssl: settings.torrent.ssl
+        host: torrent.host,
+        port: torrent.port,
+        username: torrent.username,
+        password: torrent.password,
+        ssl: torrent.ssl
       };
 }
 
@@ -215,25 +218,48 @@ function getTorrentSettings(id) {
       return future.wait();
     },
 
-    updateSettings: function(form) {
+    updateProfile: function(form) {
+      console.log('Updating ' + this.userId + '\'s profile...');
       form = formToArray(form);
-      Settings.update({user: this.userId}, {
+      Profile.update({user: this.userId}, {
         $set:{
-          profile: {
-            fName: form['fName'],
-            lName: form['lName']
-          },
-          torrent: {
-            host: form['torrentHost'],
-            port: parseInt(form['torrentPort']),
-            username: form['torrentUserName'],
-            password: form['torrentPassword'],
-            ssl: ((form['torrentSSL']) ? true : false)
-          },
-          weather: {
-            appId: form['weatherAppId'],
-            zip: form['weatherZip']
-          }
+          fName: form['fName'],
+          lName: form['lName']
+        }
+      });
+      // Session.set('profile', {fName: form['fName'], lName: form['lName']});
+      return true;
+    },
+
+    updateTorrent: function(form) {
+      form = formToArray(form);
+      Torrent.update({user: this.userId}, {
+        $set:{
+          host: form['torrentHost'],
+          port: form['torrentPort'],
+          username: form['torrentUserName'],
+          password: form['torrentPassword'],
+          ssl: ((form['torrentSSL'] ? true : false))
+        }
+      });
+    },
+
+    updateWeather: function(form) {
+      form = formToArray(form);
+      Weather.update({user: this.userId}, {
+        $set:{
+          appId: form['weatherAppID'],
+          zip: form['weatherZip']
+        }
+      });
+    },
+
+    updateMal: function(form) {
+      form = formToArray(form);
+      Mal.update({user: this.userId}, {
+        $set:{
+          username: form['malUsername'],
+          password: form['malPassword']
         }
       });
     }

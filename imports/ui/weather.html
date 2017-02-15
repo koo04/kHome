@@ -3,21 +3,32 @@
 
       <div class="col s4">
         <div class="card weather">
-          {{#with todaysForcast}}
-          <div class="row valign-wrapper" style="margin: 0">
+          {{#if weatherError}}
+            <div class="row" style="margin: 0">
+              <div class="col s12">
+                <h4>Weather</h4>
+              </div>
+              <div class="col s12">
+                {{weatherError}}
+              </div>
+            </div>
+          {{else}}
+            {{#with todaysForcast}}
+            <div class="row valign-wrapper" style="margin: 0">
 
-            <div class="col s3">
-              <h1 class="valign center width-100">{{temp}}&deg;</h1>
+              <div class="col s3">
+                <h1 class="valign center width-100">{{temp}}&deg;</h1>
+              </div>
+              <div class="col s3">
+                <h1 class="valign center width-100"><i class="wi wi-{{time}}{{icon.icon}}"></i></h1>
+              </div>
+              <div class="col s3">
+                <h1 class="valign center width-100"><i class="wi wi-wind towards-{{wind.dir}}-deg"></i></h1>
+              </div>
+              
             </div>
-            <div class="col s3">
-              <h1 class="valign center width-100"><i class="wi wi-{{time}}{{icon.icon}}"></i></h1>
-            </div>
-            <div class="col s3">
-              <h1 class="valign center width-100"><i class="wi wi-wind towards-{{wind.dir}}-deg"></i></h1>
-            </div>
-            
-          </div>
-          {{/with}}
+            {{/with}}
+          {{/if}}
         </div>
       </div>
 

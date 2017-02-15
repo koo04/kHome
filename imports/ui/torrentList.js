@@ -10,16 +10,14 @@ Template.torrent_list.onCreated(function() {
   this.currentUpload = new ReactiveVar(false);
   this.torrentUpload = new ReactiveVar(false);
 
+  console.log("Getting initial Torrent list for " + Meteor.userId() + "...");
   Meteor.call("getTorrents", function(err, torrents) {
 
     if(!torrents.code) {
-      // torrents.forEach(function(torrent) {
-      console.log("Getting initial Torrent list...");
       Session.set('torrents', torrents);
-      // });
   
       Meteor.setInterval(function() {
-        console.log("Torrents Refreshing...");
+        console.log("Torrents Refreshing for " + Meteor.userId() + "...");
         Meteor.call("getTorrents", function(err, torrents) {
           if(!torrents.code) {
             torrents.forEach(function(torrent) {
@@ -30,11 +28,14 @@ Template.torrent_list.onCreated(function() {
             Session.set('torrentsError', "Can not reach Torrent server");
           }
         });
-      }, 3000);
+      }, 10000);
 
-    } else if(torrents.code = "ENOTFOUND") {
+    } else if(torrents.code == "ENOTFOUND") {
       console.log("Can not reach the Torrent Server!");
       Session.set('torrentsError', "Can not reach Torrent server");
+    } else if(torrents.code == "ECONNREFUSED") {
+      console.log("Invalid credentials");
+      Session.set('torrentsError', "Invalid Login for Server!");
     } else {
       console.log(err || torrents);
     }

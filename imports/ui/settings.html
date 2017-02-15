@@ -16,86 +16,121 @@
           <label class="active" for="email">Email</label>
         </div>
         <div class="input-field col s4">
-          <input type="text" name="fName" value="{{profile.fName}}">
+          <input type="text" name="fName" value="{{fName}}">
           <label class="active" for="fName">First Name</label>
         </div>
         <div class="input-field col s4">
-          <input type="text" name="lName" value="{{profile.lName}}">
+          <input type="text" name="lName" value="{{lName}}">
           <label class="active" for="lName">Last Name</label>
+        </div>
+        <div class="col s12">
+          <a class="btn profile">Save</a>
+          <span class="saved text-green" style="display: none;">Saved</span>
         </div>
       </div>
       {{/with}}
-      <div class="row">
-        <div class="input-field col s6">
-          <input type="password" class="validate" name="pass">
-          <label for="pass">New Password</label>
-        </div>
-        <div class="input-field col s6">
-          <input type="password" class="validate" name="repass">
-          <label for="pass">Repeat Password</label>
-        </div>
-      </div>
     </form>
   </div>
+
   <div class="row">
-    <form class="col s6 offset-s3 card settings padding-2">
+    <form class="col s6 offset-s3 card torrent">
       <div class="row">
         <div class="col s12">
-          <h4>Settings</h4>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col s12">
-          <h5>Torrent Server</h5>
+          <h4>Torrent Settings</h4>
         </div>
       </div>
       {{#with torrent}}
       <div class="row">
         <div class="input-field col s10">
-          <input type="text" name="torrentHost" value="{{torrent.host}}">
+          <input type="text" name="torrentHost" value="{{host}}">
           <label for="torrentHost">Host</label>
         </div>
         <div class="input-field col s2">
-          <input type="number" name="torrentPort" value="{{torrent.port}}">
+          <input type="number" name="torrentPort" value="{{port}}">
           <label class="active" for="torrentPort">Port</label>
         </div>
       </div>
       <div class="row">
         <div class="input-field col s6">
-          <input type="text" name="torrentUserName" value="{{torrent.username}}">
+          <input type="text" name="torrentUserName" value="{{username}}">
           <label for="torrentUserName">User Name</label>
         </div>
         <div class="input-field col s6">
-          <input type="password" name="torrentPassword" value="{{torrent.password}}">
+          <input type="password" name="torrentPassword" value="{{password}}">
           <label for="torrentPassword">Password</label>
         </div>
       </div>
-      <div class="row">
+      <div class="row padding-1">
         <p>SSL</p>
         <div class="switch">
           <label>
           Off
-          <input type="checkbox" name="torrentSSL" value="{{torrent.ssl}}">
+          <input type="checkbox" name="torrentSSL" value="{{ssl}}">
           <span class="lever"></span>
           On
           </label>
         </div>
       </div>
-      {{/with}}
       <div class="row">
         <div class="col s12">
-          <h5>Weather</h5>
+          <button class="btn torrent">Save</button>
+          <span class="saved text-green" style="display: none;">Saved</span>
+        </div>
+      </div>
+      {{/with}}
+    </form>
+  </div>
+
+  <div class="row">
+    <form class="col s6 offset-s3 card weather">
+      <div class="row">
+        <div class="col s12">
+          <h4>Weather Settings</h4>
         </div>
       </div>
       {{#with weather}}
       <div class="row">
         <div class="input-field col s6">
-          <input type="text" name="weatherAppID" value="{{weather.appId}}">
+          <input type="text" name="weatherAppID" value="{{appId}}">
           <label for="weatherAppID">App ID</label>
         </div>
         <div class="input-field col s6">
-          <input type="text" name="weatherZip" value="{{weather.zip}}">
+          <input type="text" name="weatherZip" value="{{zip}}">
           <label for="weatherZip">ZIP Code</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col s12">
+          <button class="btn weather">Save</button>
+          <span class="saved text-green" style="display: none;">Saved</span>
+        </div>
+      </div>
+      {{/with}}
+    </form>
+  </div>
+
+  <div class="row">
+    <form class="col s6 offset-s3 card mal">
+      <div class="row">
+        <div class="col s12">
+          <h4>MyAnimeList Settings</h4>
+        </div>
+      </div>
+      {{#with mal}}
+      <div class="row">
+        <div class="input-field col s6">
+          <input type="text" name="malUsername" value="{{username}}">
+          <label for="malUsername">Username</label>
+        </div>
+        <div class="input-field col s6">
+          <input type="password" name="malPassword" value="{{password}}">
+          <label for="malPassword">Password</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col s12">
+          <button class="btn mal">Save</button>
+          <span class="saved text-green" style="display: none;">Saved</span>
         </div>
       </div>
       {{/with}}
