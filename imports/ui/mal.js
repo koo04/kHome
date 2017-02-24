@@ -1,0 +1,1 @@
+import './mal.html';

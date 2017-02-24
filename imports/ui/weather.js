@@ -1,3 +1,4 @@
+import { Timer } from '../../lib/Tools';
 import "./weather.html";
 
 (function() {
@@ -22,11 +23,10 @@ import "./weather.html";
 
           Session.set('weather', weather);
           
-          Meteor.setInterval(function() {
+          Timer.start('weather', function() {
             Meteor.call("getWeather", function(err, weather) {
               var sunset = new Date(weather.sunset).getHours();
               var time = new Date().getHours();
-              console.log(weather);
               if(!(weather.code > 699 && weather.code < 800) && !(weather.code > 899 && weather.code < 1000)) {
                 if(time < sunset) {
                   weather.time = "day-";

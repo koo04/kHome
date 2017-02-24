@@ -1,6 +1,8 @@
 import { Template } from 'meteor/templating';
 import { FilesCollection } from 'meteor/ostrio:files';
 import { ReactiveVar } from 'meteor/reactive-var';
+import { Torrents } from '../../lib/Torrents.js';
+import { Timer } from '../../lib/Tools';
 import './torrentList.html';
 
 (function() {
@@ -16,19 +18,19 @@ Template.torrent_list.onCreated(function() {
     if(!torrents.code) {
       Session.set('torrents', torrents);
   
-      Meteor.setInterval(function() {
-        console.log("Torrents Refreshing for " + Meteor.userId() + "...");
-        Meteor.call("getTorrents", function(err, torrents) {
-          if(!torrents.code) {
-            torrents.forEach(function(torrent) {
-              Session.set('torrents', torrents);
-            });
-          } else if(torrents.code = "ENOTFOUND") {
-            console.log("Can not reach the Torrent Server!");
-            Session.set('torrentsError', "Can not reach Torrent server");
-          }
-        });
-      }, 10000);
+    Timer.start("torrents", function() {
+      console.log("Torrents Refreshing for " + Meteor.userId() + "...");
+      Meteor.call("getTorrents", function(err, torrents) {
+        if(!torrents.code) {
+          torrents.forEach(function(torrent) {
+            Session.set('torrents', torrents);
+          });
+        } else if(torrents.code = "ENOTFOUND") {
+          console.log("Can not reach the Torrent Server!");
+          Session.set('torrentsError', "Can not reach Torrent server");
+        }
+      });
+    }, 10000);
 
     } else if(torrents.code == "ENOTFOUND") {
       console.log("Can not reach the Torrent Server!");

@@ -1,6 +1,9 @@
 import { Template } from 'meteor/templating';
+import { Timer } from '../../lib/Tools';
 import './body.html';
 import './settings.js';
+
+var timer;
 
 function formToArray (form) {
   var fo = [];
@@ -28,6 +31,7 @@ Template.body.events({
   },
   'click a.settings': function(e, t) {
     e.preventDefault();
+    Timer.stopAll();
     console.log("Settings page");
     t.settingsPage.set(true);
   },

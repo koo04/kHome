@@ -45,7 +45,6 @@ import './torrent.html'
     },
 
     'click button.play': function(e, t) {
-      // Session.clear();
       e.preventDefault();
       var id = parseInt(e.target.dataset.id);
       console.log("Playing Torrent: " + id);
