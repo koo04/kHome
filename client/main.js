@@ -4,4 +4,5 @@ import '../imports/ui/torrent.js';
 import '../imports/ui/preload.js';
 import '../imports/ui/weather.js';
 import '../imports/ui/login.js';
+import '../imports/ui/mal.js';
 
