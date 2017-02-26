@@ -7,20 +7,12 @@ import popura from 'popura';
   Meteor.methods({
 
     getAnimeStats: function() {
+      var future = new Future();
       var settings = Mal.findOne({user: Meteor.userId()});
-      // client = popura(settings.username, settings.password);
-
-      // var list = client.getAnimeList();
-      //TODO: Create Stats;
-    },
-
-    getAnimeList: function() {
-      var settings = Mal.findOne({user: Meteor.userId()});
-      // client = popura(settings.username, settings.password);
-
-      // client.getAnimeList()
-      //   .then(res => console.log(res))
-      //   .catch(err => console.log(err));
+      client = popura(settings.username, settings.password);
+      client.getAnimeList()
+        .then(res => future.return(res));
+      return future.wait();
     }
 
   });

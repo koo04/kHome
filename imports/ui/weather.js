@@ -3,7 +3,7 @@ import "./weather.html";
 
 (function() {
 
-    Template.weather.onCreated(function() {
+    Template.weather.onRendered(function() {
       Meteor.call("getWeather", function(err, weather) {
         if(!weather.response){
           var sunset = new Date(weather.sunset).getHours();
