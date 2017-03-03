@@ -3,16 +3,9 @@ import Future from 'fibers/future';
 import { Profile } from '/lib/Settings';
 import { Torrent } from '/lib/Settings';
 import { Weather } from '/lib/Settings';
+import { Lazy } from '/lib/Tools';
 import { Mal } from '/lib/Settings';
 var transmission;
-
-function formToArray (form) {
-  var fo = [];
-  for(var i = 0; i < form.length; i++) {
-    fo[form[i].name] = form[i].value;
-  }
-  return fo;
-}
 
 function getStatus(status) {
   switch(status) {
@@ -220,7 +213,7 @@ function getTorrentSettings(id) {
 
     updateProfile: function(form) {
       console.log('Updating ' + this.userId + '\'s profile...');
-      form = formToArray(form);
+      form = Lazy.formToArray(form);
       Profile.update({user: this.userId}, {
         $set:{
           fName: form['fName'],
@@ -232,7 +225,7 @@ function getTorrentSettings(id) {
     },
 
     updateTorrent: function(form) {
-      form = formToArray(form);
+      form = Lazy.formToArray(form);
       Torrent.update({user: this.userId}, {
         $set:{
           host: form['torrentHost'],
@@ -240,26 +233,6 @@ function getTorrentSettings(id) {
           username: form['torrentUserName'],
           password: form['torrentPassword'],
           ssl: ((form['torrentSSL'] ? true : false))
-        }
-      });
-    },
-
-    updateWeather: function(form) {
-      form = formToArray(form);
-      Weather.update({user: this.userId}, {
-        $set:{
-          appId: form['weatherAppID'],
-          zip: form['weatherZip']
-        }
-      });
-    },
-
-    updateMal: function(form) {
-      form = formToArray(form);
-      Mal.update({user: this.userId}, {
-        $set:{
-          username: form['malUsername'],
-          password: form['malPassword']
         }
       });
     }

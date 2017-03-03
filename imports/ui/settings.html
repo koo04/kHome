@@ -190,22 +190,69 @@
 
     </div>
     <div class="col s6">
-      
-    <form class="card rss">
 
-      <table>
-        <thead>
-          <tr>
-            <th>Title</th>
-            <th>Link</th>
-          </tr>
-        </thead>
-        <tbody>
+      <div class="row">
 
-        </tbody>
-      </table>
+        <form class="col s12 card rss">
 
-    </form>
+          <div class="row">
+
+            <div class="col s12">
+              <h4>RSS Feeds</h4>
+            </div>
+
+          </div>
+
+          <div class="row">
+
+            <div class="col 12">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Title</th>
+                    <th>Link</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {{#if rss}}
+                    {{#each rss}}
+                    <tr>
+                      <td>{{title}}</td>
+                      <td>{{link}}</td>
+                      <td>
+                        <button class="waves-effect waves-light btn red delete" data-id="{{_id}}"><i class="material-icons">delete</i></button>
+                      </td>
+                    </tr>
+                    {{/each}}
+                  {{else}}
+                  <tr>
+                    <td>NO FEEDS</td>
+                  </tr>
+                  {{/if}}
+                  <tr>
+                    <td>
+                      <div class="input-field">
+                        <input type="text" name="rssTitle">
+                        <label for="rssTitle">Feed Title</label>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="input-field">
+                        <input type="text" name="rssLink">
+                        <label for="rssLink">Feed Link</label>
+                      </div>    
+                    </td>
+                    <td><button class='btn add'>Save</button></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+          </div>
+
+        </form>
+
+      </div>
     
     </div>
 

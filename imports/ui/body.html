@@ -10,17 +10,15 @@
       </ul>
     </div>
   </nav>
+  <div class="container margin-top-8">
   {{#if settingsPage}}
-  <div class="container">
     {{> settings}}
-  </div>
   {{else}}
-  <div class="container">
-      {{> weather}}
-      {{> mal}}
-      {{> torrent_list}}
-  </div>
+    {{> weather}}
+    {{> mal}}
+    {{> torrent_list}}
   {{/if}}
+  </div>
   <footer class="page-footer">
     <div class="footer-copyright">
       <div class="container">

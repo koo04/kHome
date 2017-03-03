@@ -1,5 +1,6 @@
 import Future from 'fibers/future';
 import { Mal } from '/lib/Settings';
+import { Lazy } from '/lib/Tools';
 import popura from 'popura';
 
 (function() {
@@ -13,6 +14,16 @@ import popura from 'popura';
       client.getAnimeList()
         .then(res => future.return(res));
       return future.wait();
+    },
+
+    updateMal: function(form) {
+      form = Lazy.formToArray(form);
+      Mal.update({user: this.userId}, {
+        $set:{
+          username: form['malUsername'],
+          password: form['malPassword']
+        }
+      });
     }
 
   });

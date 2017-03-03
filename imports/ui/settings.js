@@ -2,9 +2,13 @@ import { Profile } from '/lib/Settings';
 import { Torrent } from '/lib/Settings';
 import { Weather } from '/lib/Settings';
 import { Mal } from '/lib/Settings';
+import { Rss } from '/lib/Rss';
+import { Lazy } from '/lib/Tools';
 import './settings.html';
 
 Template.settings.onCreated(function() {
+  Session.set('rssFeedList', false);
+
   if(!Mal.findOne({user: Meteor.userId()})) {
     Mal.insert({
       user: Meteor.userId(),
@@ -12,6 +16,9 @@ Template.settings.onCreated(function() {
       password: ""
     });
   }
+
+  Session.set('rssFeedList', Rss.find({user: Meteor.userId()}).fetch());
+
 });
 
 Template.settings.onRendered(function() {
@@ -55,12 +62,33 @@ Template.settings.events({
     var form = $('form.mal').serializeArray();
     Meteor.call('updateMal', form);
     $('form.mal .saved').show().fadeOut(2000);
+  },
+  'click form.rss button.add': function(e, t) {
+    e.preventDefault();
+    var form = $('form.rss').serializeArray();
+    var formArray = Lazy.formToArray(form);
+    Rss.insert({
+      user: user,
+      title: formArray.rssTitle,
+      link: formArray.rssLink
+    },function(err, id) {
+      Session.set('rssFeedList', Rss.find({user: Meteor.userId()}).fetch());
+    });
+  },
+  'click form.rss button.delete': function(e, t) {
+    e.preventDefault();
+    var id = $(this)[0]._id;
+    Rss.remove({_id: id});
+    Session.set('rssFeedList', Rss.find({user: Meteor.userId()}).fetch());
   }
 });
 
 Template.settings.helpers({
   userEmail: function() {
     return Meteor.user().emails[0].address;
+  },
+  rss: function() {
+    return Session.get('rssFeedList');
   },
   profile: function() {
     var profile = Profile.findOne({user: Meteor.userId()});

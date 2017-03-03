@@ -18,19 +18,19 @@ Template.torrent_list.onCreated(function() {
     if(!torrents.code) {
       Session.set('torrents', torrents);
   
-    Timer.start("torrents", function() {
-      console.log("Torrents Refreshing for " + Meteor.userId() + "...");
-      Meteor.call("getTorrents", function(err, torrents) {
-        if(!torrents.code) {
-          torrents.forEach(function(torrent) {
-            Session.set('torrents', torrents);
-          });
-        } else if(torrents.code = "ENOTFOUND") {
-          console.log("Can not reach the Torrent Server!");
-          Session.set('torrentsError', "Can not reach Torrent server");
-        }
-      });
-    }, 10000);
+      Timer.start("torrents", function() {
+        console.log("Torrents Refreshing for " + Meteor.userId() + "...");
+        Meteor.call("getTorrents", function(err, torrents) {
+          if(!torrents.code) {
+            torrents.forEach(function(torrent) {
+              Session.set('torrents', torrents);
+            });
+          } else if(torrents.code = "ENOTFOUND") {
+            console.log("Can not reach the Torrent Server!");
+            Session.set('torrentsError', "Can not reach Torrent server");
+          }
+        });
+      }, 10000);
 
     } else if(torrents.code == "ENOTFOUND") {
       console.log("Can not reach the Torrent Server!");

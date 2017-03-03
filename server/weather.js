@@ -38,6 +38,16 @@ function getPlace() {
         }
       });
       return future.wait();
+    },
+
+    updateWeather: function(form) {
+      form = formToArray(form);
+      Weather.update({user: this.userId}, {
+        $set:{
+          appId: form['weatherAppID'],
+          zip: form['weatherZip']
+        }
+      });
     }
 
   });
