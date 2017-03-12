@@ -1,10 +1,7 @@
 import Transmission from 'transmission';
 import Future from 'fibers/future';
-import { Profile } from '/lib/Settings';
 import { Torrent } from '/lib/Settings';
-import { Weather } from '/lib/Settings';
 import { Lazy } from '/lib/Tools';
-import { Mal } from '/lib/Settings';
 var transmission;
 
 function getStatus(status) {
@@ -29,12 +26,12 @@ function getStatus(status) {
 }
 
 function formatBytes(bytes,decimals) {
-   if(bytes == 0) return '0 Bytes';
-   var k = 1000,
-       dm = decimals + 1 || 3,
-       sizes = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'],
-       i = Math.floor(Math.log(bytes) / Math.log(k));
-   return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
+  if(bytes == 0) return '0 Bytes';
+  var k = 1000,
+    dm = decimals + 1 || 3,
+    sizes = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'],
+    i = Math.floor(Math.log(bytes) / Math.log(k));
+  return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
 }
 
 function limitString(str, lng) {
@@ -61,7 +58,7 @@ function getTorrentSettings(id) {
       };
 }
 
-(function() {
+(function(){ 
 
   var ids = [];
 
@@ -69,6 +66,8 @@ function getTorrentSettings(id) {
 
     putTorrents: function(tor) {
       var future = new Future();
+      var settings = getTorrentSettings();
+      transmission = new Transmission (settings);
 
       transmission.addFile(tor.versions.original.path, function(err, arg){
         if(arg)
@@ -83,8 +82,8 @@ function getTorrentSettings(id) {
     getTorrents: function () {
       var future = new Future();
       var settings = getTorrentSettings();
-      console.log("Gettings Torrents...");
       transmission = new Transmission (settings);
+      console.log("Gettings Torrents...");
       transmission.get(function(err, res) {
         var torrents = [];
         ids = [];
@@ -119,7 +118,7 @@ function getTorrentSettings(id) {
             });
             ids.push(torrent.id);
           });
-
+          torrents.reverse();
           future.return(torrents);
         }
       });
@@ -129,6 +128,8 @@ function getTorrentSettings(id) {
 
     deleteTorrent: function(id) {
       var future = new Future();
+      var settings = getTorrentSettings();
+      transmission = new Transmission (settings);
 
       transmission.remove(id, function(err, args) {
         if(err) {
@@ -143,6 +144,8 @@ function getTorrentSettings(id) {
 
     isPlaying: function(id) {
       var future = new Future();
+      var settings = getTorrentSettings();
+      transmission = new Transmission (settings);
 
       transmission.get(id, function(err, tor) {
         if(err) {
@@ -161,6 +164,8 @@ function getTorrentSettings(id) {
 
     pauseTorrent: function(id) {
       var future = new Future();
+      var settings = getTorrentSettings();
+      transmission = new Transmission (settings);
 
       transmission.stop(id, function(err, arg) {
         if(err) {
@@ -173,6 +178,8 @@ function getTorrentSettings(id) {
 
     playTorrent: function(id) {
       var future = new Future();
+      var settings = getTorrentSettings();
+      transmission = new Transmission (settings);
 
       transmission.start(id, function(err, arg) {
         if(err) {
@@ -187,6 +194,8 @@ function getTorrentSettings(id) {
 
     pauseAll: function() {
       var future = new Future();
+      var settings = getTorrentSettings();
+      transmission = new Transmission (settings);
       
       transmission.stop(ids, function(err, args) {
         if(err)
@@ -200,6 +209,8 @@ function getTorrentSettings(id) {
 
     playAll: function() {
       var future = new Future();
+      var settings = getTorrentSettings();
+      transmission = new Transmission (settings);
 
       transmission.start(ids, function(err, args) {
         if(err)
@@ -209,19 +220,6 @@ function getTorrentSettings(id) {
       });
 
       return future.wait();
-    },
-
-    updateProfile: function(form) {
-      console.log('Updating ' + this.userId + '\'s profile...');
-      form = Lazy.formToArray(form);
-      Profile.update({user: this.userId}, {
-        $set:{
-          fName: form['fName'],
-          lName: form['lName']
-        }
-      });
-      // Session.set('profile', {fName: form['fName'], lName: form['lName']});
-      return true;
     },
 
     updateTorrent: function(form) {
@@ -239,5 +237,4 @@ function getTorrentSettings(id) {
 
   });
 
-}())
-
+}());

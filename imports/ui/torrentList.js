@@ -47,7 +47,7 @@ Template.torrent_list.onCreated(function() {
 
 Template.torrent_list.events({
 
-  'change #fileInput': function (e, t) {
+  'change #torrentInput': function (e, t) {
     if (e.currentTarget.files && e.currentTarget.files[0]) {
       console.log("Uploading files: " + e.currentTarget.files);
       var upload = Torrents.insert({
@@ -84,6 +84,12 @@ Template.torrent_list.events({
     e.preventDefault();
     console.log("Playing all torrents.");
     Meteor.call("playAll");
+  },
+
+  'click a.torrentUpload': function(e, t) {
+    e.preventDefault();
+    console.log("TEST");
+    $('#torrentInput').trigger('click');
   }
 
 });

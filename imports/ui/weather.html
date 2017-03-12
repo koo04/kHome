@@ -1,36 +1,41 @@
 <template name="weather">
-    <div class="row center">
 
-      <div class="col s4">
+      <div class="col s4 center right">
         <div class="card weather">
-          {{#if weatherError}}
-            <div class="row" style="margin: 0">
-              <div class="col s12">
-                <h4>Weather</h4>
-              </div>
+          <div class="card-content">
+
+            <div class="row" style="margin: 0;">
+            
+            {{#if weatherError}}
               <div class="col s12">
                 {{weatherError}}
               </div>
-            </div>
-          {{else}}
-            {{#with todaysForcast}}
-            <div class="row valign-wrapper" style="margin: 0">
+            {{else}}
+              {{#if todaysForcast}}
+                {{#with todaysForcast}}
+                <div class="valign-wrapper">
 
-              <div class="col s3">
-                <h1 class="valign center width-100">{{temp}}&deg;</h1>
-              </div>
-              <div class="col s3">
-                <h1 class="valign center width-100"><i class="wi wi-{{time}}{{icon.icon}}"></i></h1>
-              </div>
-              <div class="col s3">
-                <h1 class="valign center width-100"><i class="wi wi-wind towards-{{wind.dir}}-deg"></i></h1>
-              </div>
-              
+                  <div class="col s3">
+                    <h2 class="valign center width-100">{{temp}}&deg;</h2>
+                  </div>
+                  <div class="col s3">
+                    <h2 class="valign center width-100"><i class="wi wi-{{time}}{{icon.icon}}"></i></h2>
+                  </div>
+                  <div class="col s3">
+                    <h2 class="valign center width-100"><i class="wi wi-wind towards-{{wind.dir}}-deg"></i></h2>
+                  </div>
+                  
+                </div>
+                {{/with}}
+              {{else}}
+                  {{> preload}}
+              {{/if}}
+            {{/if}}
+
             </div>
-            {{/with}}
-          {{/if}}
+
+          </div>
         </div>
       </div>
 
-    </div>
 </template>

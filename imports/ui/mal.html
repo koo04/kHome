@@ -1,8 +1,8 @@
 <template name='mal'>
 
-  <div class="row">
+  <!--<div class="row">-->
 
-    <div class="col s12">
+    <div class="col s4">
       <div class="card animeStats">
         {{#if getStats}}
         {{#with getStats}}
@@ -14,11 +14,11 @@
 
           <div class="row">
 
-            <div class="col s2">
-              <b>Days Watched</b>
-              <p>{{myinfo.user_days_spent_watching}}</p>
+            <div class="col s3">
+              <b>Watched</b>
+              <p>{{myinfo.user_days_spent_watching}} <small>days</small></p>
             </div>
-            <div class="col s2">
+            <div class="col s3">
               <b>Watching</b>
               <p>{{myinfo.user_watching}}</p>
             </div>
@@ -39,6 +39,6 @@
       </div>
     </div>
 
-  </div>
+  <!--</div>-->
 
 </template>

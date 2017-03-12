@@ -3,16 +3,28 @@
 <div class="row center">
   <div class="col s12">
     <div class="card padding-3 torrents">
+      {{#with currentUpload}}
+      <div class="progress">
+        <div class="determinate" style="width: {{progress.get}}"></div>
+      </div>
+      {{/with}}
+      {{#with torrentUpload}}
+      <div class="progress">
+        <div class="indeterminate"></div>
+      </div>
+      {{/with}}
       <div class="row">
         <div class="left card-title">
           <b>Torrents</b>
         </div>
+        <input type="file" name="torrent" id="torrentInput" multiple hidden>
         <!--<div class="right fixed-action-btn horizontal" style="position: absolute; display: inline-block; right: 24px;">-->
         <div class="fixed-action-btn horizontal" style="position: absolute; bottom: inherit;">
           <a class="btn-floating btn-large black">
             <i class="large material-icons">settings</i>
           </a>
           <ul>
+            <li><a class="btn-floating purple torrentUpload"><i class="material-icons">input</i></a></li>
             <li><a class="btn-floating blue pause-all"><i class="material-icons">pause</i></a></li>
             <li><a class="btn-floating green darken-1 play-all"><i class="material-icons">play_arrow</i></a></li>
           </ul>
@@ -43,24 +55,6 @@
             {{/each}}
           </tbody>
         </table>
-        <form>
-          <div class="file-field input-field">
-            <div class="btn">
-              <span>Upload Torrent</span>
-              <input type="file" name="torrent" id="fileInput" multiple>
-            </div>
-          </div>
-        </form>
-        {{#with currentUpload}}
-        <div class="progress">
-            <div class="determinate" style="width: {{progress.get}}"></div>
-        </div>
-        {{/with}}
-        {{#with torrentUpload}}
-        <div class="progress">
-            <div class="indeterminate"></div>
-        </div>
-        {{/with}}
 
         {{else if torrentsError}}
           <div>

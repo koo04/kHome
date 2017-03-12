@@ -14,8 +14,10 @@
   {{#if settingsPage}}
     {{> settings}}
   {{else}}
-    {{> weather}}
-    {{> mal}}
+    <div class="row">
+      {{> weather}}
+      {{> mal}}
+    </div>
     {{> torrent_list}}
   {{/if}}
   </div>
