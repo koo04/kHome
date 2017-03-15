@@ -42,6 +42,6 @@ Template.body.events({
 });
 
 Template.registerHelper("toDateTime", function(time) {
-  var dateTime = new Date(time).toLocaleString();
+  var dateTime = new Date(time * 1000).toLocaleString();
   return dateTime;
 });
