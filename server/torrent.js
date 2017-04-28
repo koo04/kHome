@@ -71,7 +71,7 @@ function getTorrentSettings(id) {
 
       transmission.addFile(tor.versions.original.path, function(err, arg){
         if(arg)
-          future.return(true);
+          future.return(arg);
         else
           future.return(err);
       });
