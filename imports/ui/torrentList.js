@@ -66,9 +66,18 @@ Template.torrent_list.events({
         t.currentUpload.set(false);
         t.torrentUpload.set(this);
         Meteor.call("putTorrents", tor, function(err, test) {
-          console.log(test);
           t.torrentUpload.set(false);
-        })
+          Meteor.call("getTorrents", function(err, torrents) {
+            if(!torrents.code) {
+              torrents.forEach(function(torrent) {
+                Session.set('torrents', torrents);
+              });
+            } else if(torrents.code = "ENOTFOUND") {
+              console.log("Can not reach the Torrent Server!");
+              Session.set('torrentsError', "Can not reach Torrent server");
+            }
+          });
+        });
       });
 
       upload.start();
