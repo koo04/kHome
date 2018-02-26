@@ -2,9 +2,16 @@
   "name": "kHome",
   "private": true,
   "scripts": {
-    "start": "node release.js"
+    "start": "node release.js",
+    "debug": "node debug.js"
   },
   "dependencies": {
-    "total.js": "^2.9.30"
+    "discord.js": "^11.3.0",
+    "mongodb": "^3.0.3",
+    "promise": "^8.0.1",
+    "redis": "^2.8.0",
+    "socket.io": "^2.0.4",
+    "total.js": "^2.9.30",
+    "transmission": "^0.4.9"
   }
 }

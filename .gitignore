@@ -6,3 +6,4 @@ npm-debug.log.*
 .deploy/
 output/
 tmp/
+config
