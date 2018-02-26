@@ -83,6 +83,30 @@ client.on('message', msg => {
   }
 });
 
+client.on('userUpdate', (oldName, newName) => {
+  var discordDB = DATABASE('discord');
+
+  console.log(oldName, newName);
+});
+
+client.on('presenceUpdate', (oldMember, newMember) => {
+  var discordDB = DATABASE('discord');
+  var data = {};
+  data.userId = newMember.id;
+  data.time = Date.now();
+  data.status = newMember.presence.status;
+  if(newMember.presence && newMember.presence.game) {
+    data.playing = newMember.presence.game.name;
+    data.type = newMember.presence.game.type;
+    console.log(`[${new Date(data.time).toLocaleString()}] User ${newMember.user.username}#${newMember.user.discriminator} is now playing ${data.playing} (${data.type})`);
+  } else if(oldMember.presence.game) {
+    console.log(`[${new Date(data.time).toLocaleString()}] User ${newMember.user.username}#${newMember.user.discriminator} is no longer playing ${oldMember.presence.game.name}`);
+  } else {
+    console.log(`[${new Date(data.time).toLocaleString()}] User ${oldMember.user.username}#${oldMember.user.discriminator} is ${data.status}`);
+  }
+  discordDB.insert(data);
+});
+
 var getGamesList = function(user) {
   console.log("Make new Colelction");
   games.clear();
