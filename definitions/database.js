@@ -5,7 +5,7 @@ let DB = null;
 
 F.wait('database');
 
-MC.connect("mongodb://localhost:27017", function(err, client) {
+MC.connect(settings.mongodb.url, function(err, client) {
 	if (err)
     throw err;
     
