@@ -12,24 +12,35 @@ settings = JSON.parse(settings);
 const games = new Discord.Collection();
 
 client.on('ready', () => {
-  console.log(`Logged in as ${client.user.tag}`);
+  LOG(`Logged in as ${client.user.tag}`);
 });
 
 client.on('message', msg => {
+  var db = F.database('miku');
   if(msg.content.charAt(0) === settings.bot.trigger) {
     msg.content = msg.content.substr(1);
     var voiceChannel = msg.member.voiceChannel;
 
     //Get a random game based on Game tags
     if (msg.content.includes("gameshuffle") || msg.content.includes('gs')) {
+      db.insert({
+        user: {
+          id: msg.author.id,
+          username: msg.author.username,
+          discriminator: msg.author.discriminator,
+          avatar: msg.author.avatar
+        },
+        command: "gameshuffle",
+        dateTime: Date.now()
+      });
       msg.channel.send("はい！ I will find a game based on what I know you play.　えっと…");
-      console.log("Check to see if in voice channel and if there is more than one");
+      LOG("Check to see if in voice channel and if there is more than one");
       if(!voiceChannel){
         getGamesList(msg.member)
         .then (function(games) {
           var selected = games.random();
 
-          console.log(`Send a message to ${msg.channel.name} to suggest the game ${selected.name}`);
+          LOG(`Send a message to ${msg.channel.name} to suggest the game ${selected.name}`);
           // msg.channel.send(`${msg.author}-san, ${settings.games.responses[Math.floor(Math.random()*settings.games.responses.length)].replace('$message$', `<@&${selected.id}>`)}`);
           msg.channel.send(`${msg.author}-san, ${settings.games.responses[Math.floor(Math.random()*settings.games.responses.length)].replace('$message$', `${selected.name}`)}`);
         });
@@ -38,7 +49,7 @@ client.on('message', msg => {
         .then (function(games) {
           var selected = games.random();
 
-          console.log(`Send a message to ${msg.channel.name} to suggest the game ${selected.name}`);
+          LOG(`Send a message to ${msg.channel.name} to suggest the game ${selected.name}`);
           // msg.channel.send(`${msg.author}-san, ${settings.games.responses[Math.floor(Math.random()*settings.games.responses.length)].replace('$message$', `<@&${selected.id}>`)}`);
           msg.channel.send(`${msg.author}-san, ${settings.games.responses[Math.floor(Math.random()*settings.games.responses.length)].replace('$message$', `${selected.name}`)}`);
         });
@@ -47,29 +58,29 @@ client.on('message', msg => {
         .then (function(games) {
           var selected = games.random();
 
-          console.log(`Get ${msg.member.name}'s Voice Channel`);
+          LOG(`Get ${msg.member.name}'s Voice Channel`);
           var voiceChannel = msg.member.voiceChannel;
 
-          console.log(`Get Members of ${voiceChannel.name}`);
+          LOG(`Get Members of ${voiceChannel.name}`);
           var members = voiceChannel.members;
       
-          console.log(`Check to see if ${voiceChannel.name} is more than one person`);
+          LOG(`Check to see if ${voiceChannel.name} is more than one person`);
           if(members.size > 1) {
 
-            console.log(`Itterate through possible games until one is found that everyone can play`);
+            LOG(`Itterate through possible games until one is found that everyone can play`);
             while(selected.weight != members.size) {
-              console.log(`${selected.name}'s weight (${selected.weight}) does not match the needed minimum weight (${members.size})`);
+              LOG(`${selected.name}'s weight (${selected.weight}) does not match the needed minimum weight (${members.size})`);
 
-              console.log(`Get random game`);
+              LOG(`Get random game`);
               selected = games.random();
 
-              console.log(`Remove game from games list, so we don't try to match it again for efficency`);
+              LOG(`Remove game from games list, so we don't try to match it again for efficency`);
               games.delete(selected.id);
             }
           } else {
             selected = games.random();
           }
-          console.log(`Send a message to ${msg.channel.name} to suggest the game ${selected.name}`);
+          LOG(`Send a message to ${msg.channel.name} to suggest the game ${selected.name}`);
           // msg.channel.send(`${msg.author}-san, ${settings.games.responses[Math.floor(Math.random()*settings.games.responses.length)].replace('$message$', `<@&${selected.id}>`)}`);
           msg.channel.send(`${msg.author}-san, ${settings.games.responses[Math.floor(Math.random()*settings.games.responses.length)].replace('$message$', `${selected.name}`)}`);
           return Promise.resolve();
@@ -86,7 +97,7 @@ client.on('message', msg => {
 client.on('userUpdate', (oldName, newName) => {
   var discordDB = DATABASE('discord');
 
-  console.log(oldName, newName);
+  LOG(oldName, newName);
 });
 
 client.on('presenceUpdate', (oldMember, newMember) => {
@@ -98,29 +109,29 @@ client.on('presenceUpdate', (oldMember, newMember) => {
   if(newMember.presence && newMember.presence.game) {
     data.playing = newMember.presence.game.name;
     data.type = newMember.presence.game.type;
-    console.log(`[${new Date(data.time).toLocaleString()}] User ${newMember.user.username}#${newMember.user.discriminator} is now playing ${data.playing} (${data.type})`);
+    LOG(`[${new Date(data.time).toLocaleString()}] User ${newMember.user.username}#${newMember.user.discriminator} is now playing ${data.playing} (${data.type})`);
   } else if(oldMember.presence.game) {
-    console.log(`[${new Date(data.time).toLocaleString()}] User ${newMember.user.username}#${newMember.user.discriminator} is no longer playing ${oldMember.presence.game.name}`);
+    LOG(`[${new Date(data.time).toLocaleString()}] User ${newMember.user.username}#${newMember.user.discriminator} is no longer playing ${oldMember.presence.game.name}`);
   } else {
-    console.log(`[${new Date(data.time).toLocaleString()}] User ${oldMember.user.username}#${oldMember.user.discriminator} is ${data.status}`);
+    LOG(`[${new Date(data.time).toLocaleString()}] User ${oldMember.user.username}#${oldMember.user.discriminator} is ${data.status}`);
   }
   discordDB.insert(data);
 });
 
 var getGamesList = function(user) {
-  console.log("Make new Colelction");
+  LOG("Make new Collection");
   games.clear();
   if(user.voiceChannel) {
-    console.log("Itterate through every Voice Channel Member");
+    LOG("Itterate through every Voice Channel Member");
     user.voiceChannel.members.every((member) => {
 
-      console.log(`Itterate through ${member.id}'s roles`);
+      LOG(`Itterate through ${member.id}'s roles`);
       member.roles.every((role) => {
 
-        console.log(`Check to see if ${role.name}'s color is right`);
+        LOG(`Check to see if ${role.name}'s color is right`);
         if(role.color == settings.games.roleColor) {
 
-          console.log(`Put ${role.name} in the new Collection`);
+          LOG(`Put ${role.name} in the new Collection`);
           if(!games.exists("id", role.id))
             games.set(role.id, {
               name: role.name,
@@ -128,11 +139,11 @@ var getGamesList = function(user) {
               weight: 0
             });
 
-          console.log(`Add weight to ${games.get(role.id).name}`);
+          LOG(`Add weight to ${games.get(role.id).name}`);
           games.get(role.id).weight++;
 
         } else {
-          console.log(`${role.name} is not a game`);
+          LOG(`${role.name} is not a game`);
         }
 
         return role;
@@ -141,13 +152,13 @@ var getGamesList = function(user) {
       return member;
     });
   } else {
-    console.log(`Itterate through ${user.id}'s roles`);
+    LOG(`Itterate through ${user.id}'s roles`);
     user.roles.every((role) => {
 
-      console.log(`Check to see if ${role.name}'s color is right`);
+      LOG(`Check to see if ${role.name}'s color is right`);
       if(role.color == settings.games.roleColor) {
 
-        console.log(`Put ${role.name} in the new Collection`);
+        LOG(`Put ${role.name} in the new Collection`);
         if(!games.exists("id", role.id))
           games.set(role.id, {
             name: role.name,
@@ -155,11 +166,11 @@ var getGamesList = function(user) {
             weight: 0
           });
 
-        console.log(`Add weight to ${games.get(role.id).name}`);
+        LOG(`Add weight to ${games.get(role.id).name}`);
         games.get(role.id).weight++;
 
       } else {
-        console.log(`${role.name} is not a game`);
+        LOG(`${role.name} is not a game`);
       }
 
       return role;

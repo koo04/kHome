@@ -30,27 +30,6 @@ exports.install = function(options) {
       ssl: settings.transmission.ssl || false,
       url: settings.transmission.url || "/transmission/rpc"
     });
-    // {
-    //   addedDate: torrent.addedDate,
-    //   doneDate: torrent.doneDate,
-    //   error: torrent.error,
-    //   errorString: torrent.errorString,
-    //   eta: torrent.eta,
-    //   haveValid: torrent.haveValid,
-    //   id: torrent.id,
-    //   isFinished: torrent.isFinished,
-    //   leftUntilDone: torrent.leftUntilDone,
-    //   name: torrent.name,
-    //   peersConnected: torrent.peersConnected,
-    //   rateDownload: torrent.rateDownload,
-    //   rateUpload: torrent.rateUpload,
-    //   recheckProgress: torrent.recheckProgress,
-    //   startDate: torrent.startDate,
-    //   status: F.module('torrents').getStatus(torrent.status),
-    //   totalSize: torrent.totalSize,
-    //   uploadRatio: torrent.uploadRatio,
-    //   uploadedEver: torrent.uploadedEver
-    // }
 
     this.getAll();
     setInterval(function(callback) {

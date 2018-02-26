@@ -1,0 +1,327 @@
+13:24:32 | Logged in as みく#3515
+13:24:52 | Logged in as みく#3515
+13:25:28 | Logged in as みく#3515
+13:25:47 | [2018-2-26 13:25:47] User Stephen#0453 is offline
+13:27:04 | Logged in as みく#3515
+13:27:23 | Database {
+  readonly: false,
+  filename: '/mnt/c/Users/KooTG/Documents/GitHub/kHome/databases/miku.nosql',
+  filenameCounter: '/mnt/c/Users/KooTG/Documents/GitHub/kHome/databases/miku.nosql-counter2',
+  filenameTemp: '/mnt/c/Users/KooTG/Documents/GitHub/kHome/databases/miku.nosql-tmp',
+  filenameLog: '/mnt/c/Users/KooTG/Documents/GitHub/kHome/databases/miku.nosql-log',
+  filenameBackup: '/mnt/c/Users/KooTG/Documents/GitHub/kHome/databases/miku.nosql-backup',
+  filenameMeta: '/mnt/c/Users/KooTG/Documents/GitHub/kHome/databases/miku.meta',
+  directory: '/mnt/c/Users/KooTG/Documents/GitHub/kHome/databases',
+  filenameBackup2: '/mnt/c/Users/KooTG/Documents/GitHub/kHome/databases/miku_backup.nosql',
+  name: 'miku',
+  pending_update: [],
+  pending_append: [],
+  pending_reader: [],
+  pending_reader_view: [],
+  pending_remove: [],
+  views: {},
+  step: 0,
+  pending_drops: false,
+  pending_views: false,
+  binary: 
+   Binary {
+     db: [Circular],
+     directory: '/mnt/c/Users/KooTG/Documents/GitHub/kHome/databases/miku-binary/',
+     exists: false,
+     '$events': {} },
+  counter: 
+   Counter {
+     TIMEOUT: 30000,
+     db: [Circular],
+     key: 'nosql3351558',
+     type: 0,
+     '$events': {},
+     locked: false },
+  inmemory: {},
+  '$events': {},
+  '$free': true,
+  locked: false,
+  renaming: false }
+13:27:23 | Itterate through 92030047161970688's roles
+13:27:23 | Check to see if @everyone's color is right
+13:27:23 | Make new Collection
+13:27:23 | Check to see if in voice channel and if there is more than one
+13:27:23 | Gamer is not a game
+13:27:23 | @everyone is not a game
+13:27:23 | Check to see if Gamer's color is right
+13:27:23 | Check to see if Anime's color is right
+13:27:23 | Anime is not a game
+13:27:23 | Check to see if Streamer's color is right
+13:27:23 | Put Table Top Simulator in the new Collection
+13:27:23 | Streamer is not a game
+13:27:23 | Check to see if Table Top Simulator's color is right
+13:27:23 | Add weight to Table Top Simulator
+13:27:23 | Check to see if League Of Legends's color is right
+13:27:23 | Check to see if GTA V's color is right
+13:27:23 | Add weight to League Of Legends
+13:27:23 | Put League Of Legends in the new Collection
+13:27:23 | Put GTA V in the new Collection
+13:27:23 | Add weight to GTA V
+13:27:23 | Put Overwatch in the new Collection
+13:27:23 | Check to see if Overwatch's color is right
+13:27:23 | Add weight to Overwatch
+13:27:23 | Check to see if Not Safe For Work's color is right
+13:27:23 | Not Safe For Work is not a game
+13:27:23 | Add weight to Destiny 2
+13:27:23 | Check to see if Destiny 2's color is right
+13:27:23 | Put Destiny 2 in the new Collection
+13:27:23 | Check to see if PUBG's color is right
+13:27:23 | Put PUBG in the new Collection
+13:27:23 | Add weight to PUBG
+13:27:23 | Check to see if Battlefield 1's color is right
+13:27:23 | Add weight to Battlefield 1
+13:27:23 | Put Battlefield 1 in the new Collection
+13:27:23 | Youtube is not a game
+13:27:23 | Check to see if Youtube's color is right
+13:27:23 | Put Counter Strike: GO in the new Collection
+13:27:23 | Add weight to Counter Strike: GO
+13:27:23 | Check to see if Counter Strike: GO's color is right
+13:27:23 | Put gMod in the new Collection
+13:27:23 | Check to see if gMod's color is right
+13:27:23 | Put Rainbow Six: Siege in the new Collection
+13:27:23 | Add weight to gMod
+13:27:23 | Check to see if Rainbow Six: Siege's color is right
+13:27:23 | Check to see if Payday 2's color is right
+13:27:23 | Add weight to Rainbow Six: Siege
+13:27:23 | Check to see if Rocket Leauge's color is right
+13:27:23 | Add weight to Payday 2
+13:27:23 | Put Payday 2 in the new Collection
+13:27:23 | Put Rocket Leauge in the new Collection
+13:27:23 | Add weight to Rocket Leauge
+13:27:23 | Check to see if Star Citizen's color is right
+13:27:23 | Add weight to Star Citizen
+13:27:23 | Put Star Citizen in the new Collection
+13:27:23 | Check to see if Battlefield 4's color is right
+13:27:23 | Put Battlefield 4 in the new Collection
+13:27:23 | Check to see if Miku-san's color is right
+13:27:23 | Miku-san is not a game
+13:27:23 | Add weight to Battlefield 4
+13:27:23 | Send a message to bot-testing to suggest the game League Of Legends
+13:29:36 | Logged in as みく#3515
+13:29:38 | Database {
+  readonly: false,
+  filename: '/mnt/c/Users/KooTG/Documents/GitHub/kHome/databases/miku.nosql',
+  filenameCounter: '/mnt/c/Users/KooTG/Documents/GitHub/kHome/databases/miku.nosql-counter2',
+  filenameTemp: '/mnt/c/Users/KooTG/Documents/GitHub/kHome/databases/miku.nosql-tmp',
+  filenameLog: '/mnt/c/Users/KooTG/Documents/GitHub/kHome/databases/miku.nosql-log',
+  filenameBackup: '/mnt/c/Users/KooTG/Documents/GitHub/kHome/databases/miku.nosql-backup',
+  filenameMeta: '/mnt/c/Users/KooTG/Documents/GitHub/kHome/databases/miku.meta',
+  directory: '/mnt/c/Users/KooTG/Documents/GitHub/kHome/databases',
+  filenameBackup2: '/mnt/c/Users/KooTG/Documents/GitHub/kHome/databases/miku_backup.nosql',
+  name: 'miku',
+  pending_update: [],
+  pending_append: [],
+  pending_reader: [],
+  pending_reader_view: [],
+  pending_remove: [],
+  views: {},
+  step: 0,
+  pending_drops: false,
+  pending_views: false,
+  binary: 
+   Binary {
+     db: [Circular],
+     directory: '/mnt/c/Users/KooTG/Documents/GitHub/kHome/databases/miku-binary/',
+     exists: false,
+     '$events': {} },
+  counter: 
+   Counter {
+     TIMEOUT: 30000,
+     db: [Circular],
+     key: 'nosql3351558',
+     type: 0,
+     '$events': {},
+     locked: false },
+  inmemory: {},
+  '$events': {},
+  '$free': true,
+  locked: false,
+  renaming: false }
+13:29:38 | Check to see if in voice channel and if there is more than one
+13:29:38 | Make new Collection
+13:29:38 | Itterate through 92030047161970688's roles
+13:29:38 | Check to see if @everyone's color is right
+13:29:38 | Check to see if Gamer's color is right
+13:29:38 | @everyone is not a game
+13:29:38 | Gamer is not a game
+13:29:38 | Check to see if Anime's color is right
+13:29:38 | Anime is not a game
+13:29:38 | Check to see if Streamer's color is right
+13:29:38 | Streamer is not a game
+13:29:38 | Check to see if Table Top Simulator's color is right
+13:29:38 | Add weight to Table Top Simulator
+13:29:38 | Put Table Top Simulator in the new Collection
+13:29:38 | Check to see if League Of Legends's color is right
+13:29:38 | Put League Of Legends in the new Collection
+13:29:38 | Add weight to League Of Legends
+13:29:38 | Check to see if GTA V's color is right
+13:29:38 | Put GTA V in the new Collection
+13:29:38 | Add weight to GTA V
+13:29:38 | Put Overwatch in the new Collection
+13:29:38 | Check to see if Overwatch's color is right
+13:29:38 | Add weight to Overwatch
+13:29:38 | Check to see if Destiny 2's color is right
+13:29:38 | Check to see if Not Safe For Work's color is right
+13:29:38 | Not Safe For Work is not a game
+13:29:38 | Put Destiny 2 in the new Collection
+13:29:38 | Add weight to Destiny 2
+13:29:38 | Check to see if PUBG's color is right
+13:29:38 | Put PUBG in the new Collection
+13:29:38 | Check to see if Battlefield 1's color is right
+13:29:38 | Add weight to PUBG
+13:29:38 | Put Battlefield 1 in the new Collection
+13:29:38 | Youtube is not a game
+13:29:38 | Add weight to Battlefield 1
+13:29:38 | Check to see if Youtube's color is right
+13:29:38 | Check to see if Counter Strike: GO's color is right
+13:29:38 | Put Counter Strike: GO in the new Collection
+13:29:38 | Check to see if gMod's color is right
+13:29:38 | Put gMod in the new Collection
+13:29:38 | Add weight to Counter Strike: GO
+13:29:38 | Add weight to gMod
+13:29:38 | Check to see if Rainbow Six: Siege's color is right
+13:29:38 | Put Rainbow Six: Siege in the new Collection
+13:29:38 | Check to see if Payday 2's color is right
+13:29:38 | Put Payday 2 in the new Collection
+13:29:38 | Add weight to Rainbow Six: Siege
+13:29:38 | Add weight to Payday 2
+13:29:38 | Put Rocket Leauge in the new Collection
+13:29:38 | Check to see if Rocket Leauge's color is right
+13:29:38 | Add weight to Rocket Leauge
+13:29:38 | Check to see if Star Citizen's color is right
+13:29:38 | Put Star Citizen in the new Collection
+13:29:38 | Add weight to Star Citizen
+13:29:38 | Add weight to Battlefield 4
+13:29:38 | Put Battlefield 4 in the new Collection
+13:29:38 | Check to see if Battlefield 4's color is right
+13:29:38 | Check to see if Miku-san's color is right
+13:29:38 | Send a message to bot-testing to suggest the game Counter Strike: GO
+13:29:38 | Miku-san is not a game
+13:29:48 | Logged in as みく#3515
+13:29:51 | Collection {
+  s: 
+   { pkFactory: 
+      { [Function: ObjectID]
+        index: 4716204,
+        createPk: [Function: createPk],
+        createFromTime: [Function: createFromTime],
+        createFromHexString: [Function: createFromHexString],
+        isValid: [Function: isValid],
+        ObjectID: [Circular],
+        ObjectId: [Circular] },
+     db: 
+      Db {
+        _events: {},
+        _eventsCount: 0,
+        _maxListeners: undefined,
+        s: [Object],
+        serverConfig: [Getter],
+        bufferMaxEntries: [Getter],
+        databaseName: [Getter] },
+     topology: 
+      Server {
+        _events: [Object],
+        _eventsCount: 22,
+        _maxListeners: Infinity,
+        clientInfo: [Object],
+        s: [Object] },
+     dbName: 'khome',
+     options: 
+      { promiseLibrary: [Function: Promise],
+        readConcern: undefined,
+        readPreference: [ReadPreference] },
+     namespace: 'khome.miku',
+     readPreference: ReadPreference { mode: 'primary', tags: undefined, options: undefined },
+     slaveOk: true,
+     serializeFunctions: undefined,
+     raw: undefined,
+     promoteLongs: undefined,
+     promoteValues: undefined,
+     promoteBuffers: undefined,
+     internalHint: null,
+     collectionHint: null,
+     name: 'miku',
+     promiseLibrary: [Function: Promise],
+     readConcern: undefined } }
+13:29:51 | Make new Collection
+13:29:51 | Check to see if in voice channel and if there is more than one
+13:29:51 | Check to see if @everyone's color is right
+13:29:51 | Itterate through 92030047161970688's roles
+13:29:51 | @everyone is not a game
+13:29:51 | Check to see if Gamer's color is right
+13:29:51 | Anime is not a game
+13:29:51 | Gamer is not a game
+13:29:51 | Check to see if Anime's color is right
+13:29:51 | Streamer is not a game
+13:29:51 | Check to see if Streamer's color is right
+13:29:51 | Add weight to Table Top Simulator
+13:29:51 | Put Table Top Simulator in the new Collection
+13:29:51 | Check to see if Table Top Simulator's color is right
+13:29:51 | Check to see if League Of Legends's color is right
+13:29:51 | Put League Of Legends in the new Collection
+13:29:51 | Add weight to League Of Legends
+13:29:51 | Check to see if GTA V's color is right
+13:29:51 | Put GTA V in the new Collection
+13:29:51 | Add weight to GTA V
+13:29:51 | Check to see if Overwatch's color is right
+13:29:51 | Add weight to Overwatch
+13:29:51 | Put Overwatch in the new Collection
+13:29:51 | Check to see if Not Safe For Work's color is right
+13:29:51 | Check to see if Destiny 2's color is right
+13:29:51 | Not Safe For Work is not a game
+13:29:51 | Put Destiny 2 in the new Collection
+13:29:51 | Add weight to Destiny 2
+13:29:51 | Check to see if PUBG's color is right
+13:29:51 | Add weight to PUBG
+13:29:51 | Put PUBG in the new Collection
+13:29:51 | Check to see if Battlefield 1's color is right
+13:29:51 | Put Battlefield 1 in the new Collection
+13:29:51 | Add weight to Battlefield 1
+13:29:51 | Check to see if Youtube's color is right
+13:29:51 | Youtube is not a game
+13:29:51 | Put Counter Strike: GO in the new Collection
+13:29:51 | Add weight to Counter Strike: GO
+13:29:51 | Check to see if Counter Strike: GO's color is right
+13:29:51 | Put gMod in the new Collection
+13:29:51 | Check to see if gMod's color is right
+13:29:51 | Put Rainbow Six: Siege in the new Collection
+13:29:51 | Add weight to gMod
+13:29:51 | Check to see if Rainbow Six: Siege's color is right
+13:29:51 | Check to see if Payday 2's color is right
+13:29:51 | Add weight to Rainbow Six: Siege
+13:29:51 | Add weight to Payday 2
+13:29:51 | Check to see if Rocket Leauge's color is right
+13:29:51 | Put Payday 2 in the new Collection
+13:29:51 | Add weight to Rocket Leauge
+13:29:51 | Put Rocket Leauge in the new Collection
+13:29:51 | Put Star Citizen in the new Collection
+13:29:51 | Check to see if Star Citizen's color is right
+13:29:51 | Check to see if Battlefield 4's color is right
+13:29:51 | Add weight to Star Citizen
+13:29:51 | Put Battlefield 4 in the new Collection
+13:29:51 | Add weight to Battlefield 4
+13:29:51 | Check to see if Miku-san's color is right
+13:29:51 | Send a message to bot-testing to suggest the game GTA V
+13:29:51 | Miku-san is not a game
+13:31:29 | Logged in as みく#3515
+13:31:37 | Logged in as みく#3515
+13:34:45 | Logged in as みく#3515
+13:40:37 | [2018-2-26 13:40:37] User Templar Shield#9651 is online
+13:42:37 | [2018-2-26 13:42:37] User Templar Shield#9651 is idle
+13:45:21 | Logged in as みく#3515
+13:47:10 | Logged in as みく#3515
+13:47:45 | Logged in as みく#3515
+13:48:01 | Logged in as みく#3515
+13:48:01 | 
+13:48:17 | Logged in as みく#3515
+13:49:21 | Logged in as みく#3515
+14:04:06 | Logged in as みく#3515
+14:04:34 | Logged in as みく#3515
+14:05:06 | Logged in as みく#3515
+14:05:22 | Logged in as みく#3515
+14:05:22 | 
