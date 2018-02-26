@@ -8,7 +8,7 @@ F.wait('database');
 MC.connect(settings.mongodb.url, function(err, client) {
 	if (err)
 		throw err;
-    
+  
 	DB = client.db(settings.mongodb.dbName);
 	F.wait('database');
 });
