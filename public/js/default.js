@@ -26,9 +26,8 @@ $(document).ready(function() {
 
   socket.on('torrents', (torrents) => {
     var torrentList = $('div.torrents>table');
-    $('div.torrents>table>tr.torrent').remove();
+    $('div.torrents>table tr.torrent').remove();
     torrents.reverse().forEach((torrent) => {
-      // console.log(new Date(torrent.addedDate*1000).toISOString());
       torrentList.append(`<tr class="torrent">
         <td>${torrent.name}</td>
         <td>${torrent.rateDownload}</td>
@@ -45,7 +44,6 @@ $(document).ready(function() {
     var temp = $('div.temp>span');
     var windSpeed = $('div.windSpeed>span');
     var windDir = $('div.windDir>span');
-    console.log(weather);
     temp.html(`${Math.floor(weather.main.temp)}`);
     windSpeed.html(`${weather.wind.speed}`);
     windDir.html(`${Math.floor(weather.wind.deg)}`);
