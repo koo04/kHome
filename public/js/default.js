@@ -28,16 +28,17 @@ $(document).ready(function() {
     var torrentList = $('div.torrents>table');
     $('div.torrents>table tr.torrent').remove();
     torrents.reverse().forEach((torrent) => {
+      var rateDownload = Math.floor(torrent.rateDownload/8/1024/1024*100)/100;
+      var rateUpload = Math.floor(torrent.rateUpload/8/1024/1024*100)/100;
       torrentList.append(`<tr class="torrent">
         <td>${torrent.name}</td>
-        <td>${torrent.rateDownload}</td>
-        <td>${torrent.rateUpload}</td>
+        <td>${rateDownload > 0 ? rateDownload + "MB" : 0}</td>
+        <td>${rateUpload > 0 ? rateUpload + "MB" : 0}</td>
         <td>${torrent.status}</td>
-        <td class="timeago" datetime="${new Date(torrent.addedDate*1000).toISOString()}">${new Date().toLocaleString()}</td>
-        <td class="timeago" datetime="${new Date(torrent.doneDate*1000).toISOString()}">${new Date().toLocaleString()}</td>
+        <td>${torrent.addedDate}</td>
+        <td>${torrent.doneDate}</td>
       </tr>`);
     });
-    $("td.timeago").timeago();
   });
 
   socket.on("weather", (weather) => {

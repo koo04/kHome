@@ -4,6 +4,10 @@ exports.dependencies = ['settings', 'socket'];
 
 const Promise = require('promise');
 const Transmission = require('transmission');
+const TimeAgo = require('javascript-time-ago');
+const en = require('javascript-time-ago/locale/en');
+TimeAgo.locale(en)
+const timeAgo = new TimeAgo('en-US');
 let transmission;
 let settings;
 
@@ -50,7 +54,13 @@ exports.getAll = function() {
     }).then((torrents) => {
       torrents.forEach((torrent) => {
         var status = F.module("torrents").getStatus(torrent.status);
+        var addedDate = torrent.addedDate;
+        var dateCreated = torrent.addedDate;
+        var doneDate = torrent.doneDate;
         torrent.status = status;
+        torrent.addedDate = timeAgo.format(addedDate*1000);
+        torrent.dateCreated = timeAgo.format(dateCreated*1000);
+        torrent.doneDate = timeAgo.format(doneDate*1000);
       });
       F.io.emit('torrents', torrents);
     });
