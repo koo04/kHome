@@ -2,15 +2,13 @@ body {
    margin: 35px 200px;
 }
 
-.weather-card.mdl-card {
-  background: #3E4EB8;
+.countdown {
+  width: 100%;
+  height: 2px;
+  background-color: #ef562d;
+  /* box-shadow: 0 0 2em #ef562d; */
 }
 
-.weather-card > .mdl-card__title {
-  align-items: flex-start;
-  color: white;
-}
-
-.weather-card > .mdl-card__title > h4 {
-  margin-top: 0;
+.countdown.stop{
+  background-color: #5aef2d;
 }

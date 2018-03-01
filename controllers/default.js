@@ -1,10 +1,11 @@
 exports.install = function() {
 	F.route('/', view_index);
-	// or
-	// F.route('/');
 };
 
 function view_index() {
 	var self = this;
-	self.view('index');
+	if(self.req.cookie('login'))
+		self.view('index');
+	else
+		self.view('login');
 }

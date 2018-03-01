@@ -11,7 +11,7 @@ exports.install = function() {
     this.getWeather();
     setInterval(function(callback) {
       F.module('weather').getWeather();
-    }, 60000);
+    }, 60000*60);
   });
 };
 
@@ -22,6 +22,15 @@ exports.getWeather = function() {
     weather = JSON.parse(weather);
     weather.dateTime = Date.now();
     weatherDB.insert(weather);
+  });
+};
+
+exports.getWeatherNow = function() {
+  var query = settings.weather.city ? "q=" : "zip=";
+  U.request(`http://api.openweathermap.org/data/2.5/weather?${query}${settings.weather.city || settings.weather.zip}&APPID=${settings.weather.appID}&units=imperial`, {}, function(err, weather, status, headers, host) {
+    var weatherDB = F.database('weather'); 
+    weather = JSON.parse(weather);
+    weather.dateTime = Date.now();
     F.io.emit('weather', err || weather);
   });
 };

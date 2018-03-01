@@ -30,12 +30,6 @@ exports.install = function(options) {
       ssl: settings.transmission.ssl || false,
       url: settings.transmission.url || "/transmission/rpc"
     });
-
-    this.getAll();
-    setInterval(function(callback) {
-      F.module('torrents').getAll();
-    }, 5000);
-
     
   });
 };
