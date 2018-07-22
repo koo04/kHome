@@ -52,17 +52,28 @@ exports.getAll = function() {
         resolve(torrents.torrents);
       }
     }).then((torrents) => {
-      torrents.forEach((torrent) => {
-        var status = F.module("torrents").getStatus(torrent.status);
-        var addedDate = torrent.addedDate;
-        var dateCreated = torrent.addedDate;
-        var doneDate = torrent.doneDate;
-        torrent.status = status;
-        torrent.addedDate = timeAgo.format(addedDate*1000);
-        torrent.dateCreated = timeAgo.format(dateCreated*1000);
-        torrent.doneDate = timeAgo.format(doneDate*1000);
-      });
-      F.io.emit('torrents', torrents);
+      if(torrents){
+        var torrentsArray = [];
+        torrents.forEach((torrent) => {
+          var torrentArray = [];
+          var rateDownload = Math.floor(torrent.rateDownload/8/1024/1024*100)/100;
+          var rateUpload = Math.floor(torrent.rateUpload/8/1024/1024*100)/100;
+          var status = F.module("torrents").getStatus(torrent.status);
+          var addedDate = timeAgo.format(torrent.addedDate*1000);
+          var doneDate = torrent.doneDate > 0 ? timeAgo.format(torrent.doneDate*1000) : "Not Done";
+          torrentArray.push(torrent.name);
+          torrentArray.push(rateDownload);
+          torrentArray.push(rateUpload);
+          torrentArray.push(status);
+          torrentArray.push(addedDate);
+          torrentArray.push(doneDate);
+          torrentsArray.push(torrentArray);
+          torrentArray = null;
+        });
+        F.io.emit('torrents', torrentsArray);
+      } else {
+        F.io.emit('torrents', []);
+      }
     });
   });
 };

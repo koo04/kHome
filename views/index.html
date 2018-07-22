@@ -1,3 +1,5 @@
+<link rel="stylesheet" href="//cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css">
+
 <div class="temp">Temp: <span>0</span>&deg;f</div>
 <div class="windSpeed">Wind Speed: <span>0</span></div>
 <div class="windDir">Wind Direction: <span>0</span></div>
@@ -5,16 +7,29 @@
 <div class="torrents">
   <div class="countdown"></div>
   <table>
-    <tr>
-      <th>Name</th>
-      <th>DL Rate</th>
-      <th>UL Rate</th>
-      <th>Status</th>
-      <th>Added</th>
-      <th>Finished</th>
-    </tr>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>DL Rate</th>
+        <th>UL Rate</th>
+        <th>Status</th>
+        <th>Added</th>
+        <th>Finished</th>
+      </tr>
+    </thead>
+    <tfoot>
+        <tr>
+          <th>Name</th>
+          <th>DL Rate</th>
+          <th>UL Rate</th>
+          <th>Status</th>
+          <th>Added</th>
+          <th>Finished</th>
+        </tr>
+    </tfoot>
   </table>
 </div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-timeago/1.6.3/jquery.timeago.min.js" type="text/javascript"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery-timeago/1.6.3/jquery.timeago.min.js" type="text/javascript"></script>
+<script src="//cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
 <script src="js/default.js" type="text/javascript"></script>
